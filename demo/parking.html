@@ -7,24 +7,42 @@
   <script src="/js/oo/ImageFilter.js"></script>
   <script src="/js/oo/HotSpot.js"></script>
   <script src="/js/opencv.js"></script>
+  <script src="https://blocklypro.webduino.io/components/jquery/dist/jquery.min.js"></script>
+  <script src="https://blocklypro.webduino.io/dist/lib/webduino-all-0.4.20.min.js"></script>
+  <script src="https://blocklypro.webduino.io/dist/webduino-blockly.min.js"></script>
+  <script src="https://blocklypro.webduino.io/dist/lib/firebase.min.js"></script>
+  <script src="https://blocklypro.webduino.io/dist/lib/runtime.min.js"></script>
 </head>
 
 <body>
   <h1>Hotspot section detect</h1>
   <canvas id='c1' width=400 height=300></canvas>
   <script>
+  
+  var matrix;
+  boardReady({board: 'Smart', device: 'nMrWV', transport: 'mqtt'}, function (board) {
+    board.samplingInterval = 50;
+    matrix = getMax7219(board, 16, 14, 5);
+  });
+
   var canvasId = 'c1';
   var filter = new ImageFilter(cv);
   var canvas1 = document.getElementById('c1');
 
-  var tracking = new Hotspot(canvas1, canvas1, true, 20, 20, 200, 20, 200, 200, 20, 200);
+  var tracking = new Hotspot(canvas1, canvas1, true, 10, 10, 100, 10, 100, 100, 10, 100);
   tracking.setCvProcess(filter);
 
   tracking.inside(function (pos) {
+    matrix.animateStop();
+    matrix.on('0000000000000000');
+    matrix.on('ff818181818181ff');
     tracking.setStroke(3, "#00FF00");
   });
 
   tracking.outside(function (pos) {
+    matrix.animateStop();
+    matrix.on('0000000000000000');
+    matrix.on('ff89f79191f789ff');
     tracking.setStroke(3, "#FF0000");
   });
   
@@ -39,6 +57,7 @@
       tracking.setStroke(3, "#FF0000");
       console.log("start...");
     }, 3000);
+
   </script>
 </body>
 
