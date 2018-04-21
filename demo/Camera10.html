@@ -18,7 +18,7 @@
   new Camera(camIdx).onCanvas(canvasId, function (canvas) {
     let src = cv.imread(canvasId);
     let dstx = new cv.Mat();
-    cv.cvtColor(src, dstx, cv.COLOR_RGBA2GRAY, 0);
+    cv.cvtColor(src, dstx, cv.COLOR_RGB2GRAY, 0);
     cv.imshow('c2', dstx); //顯示到指定的畫布
     dstx.delete();
     src.delete();

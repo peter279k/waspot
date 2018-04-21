@@ -35,6 +35,7 @@
 
   //http://blog.topspeedsnail.com/archives/2112
   //H:色相 0~179 , S：飽和度 0~255 ,V：明度 0~255
+
   function test2(id) {
     let src = cv.imread(id);
     let dstx = new cv.Mat();
@@ -43,26 +44,29 @@
     let blue = {
       "low": [110, 50, 50, 0],
       "high": [130, 255, 255, 255]
-    }
+    };
     let green = {
       "low": [50, 0, 0, 0],
       "high": [70, 255, 255, 255]
-    }
+    };
     let red = {
       "low": [0, 100, 30, 0],
       "high": [180, 255, 255, 255]
-    }
+    };
     let yellow = {
       "low": [15, 0, 0, 0],
       "high": [25, 255, 255, 255]
-    }
-    let range = blue;
+    };
+
+    let range = green;
     let low = new cv.Mat(src.rows, src.cols, src.type(),
       range.low);
     let high = new cv.Mat(src.rows, src.cols, src.type(),
       range.high);
     cv.inRange(src, low, high, dstx);
     cv.imshow('c2', dstx);
+
+    // free memory
     low.delete();
     high.delete();
     src.delete();

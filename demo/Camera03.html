@@ -21,7 +21,7 @@
     var centerY = pos.y;
     var radius = pos.radius;
     var eyeRadius = radius / 6;
-    var eyeXOffset = radius / 2;
+    var eyeXOffset = radius / 3;
     var eyeYOffset = radius / 2.5;
     // draw the face circle
     context.beginPath();
@@ -36,7 +36,7 @@
     context.arc(eyeX, eyeY, eyeRadius, 0, 2 * Math.PI, false);
     var eyeX = centerX + eyeXOffset;
     context.arc(eyeX, eyeY, eyeRadius, 0, 2 * Math.PI, false);
-    context.fillStyle = 'red';
+    context.fillStyle = 'black';
     context.fill();
     // draw the mouth
     context.beginPath();
